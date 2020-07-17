@@ -120,7 +120,7 @@ void J1939::configure(ConfigCategory *config)
 /**
  * Take a reading from the J1939 plugin
  */
-Reading J1939::nextValue()
+Reading J1939::takeReading()
 {
     char    buffer[80], *ptr;
     int     ch;
@@ -136,5 +136,5 @@ Reading J1939::nextValue()
             fseek(m_fp, 0L, SEEK_SET);
         }
         DatapointValue value(buffer);
-        return Reading(m_asset, new Datapoint(m_asset, value));
+        return Reading(m_asset_name, new Datapoint(m_asset, value));
 }
