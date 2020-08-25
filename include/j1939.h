@@ -17,12 +17,34 @@ class J1939 {
 		~J1939();
 		Reading		takeReading();
 	void	setAssetName(const std::string& assetName)
-		{
+	{
 			m_asset_name = assetName;
-		}
+	}
+	void	setPort(const std::string& port)
+	{
+			m_port = port;
+	}	
+	void configure(ConfigCategory *config);
+	void start();
+	void pollThread();
+	void registerIngest(void *data, void(*cb)(void *, Reading))
+	{
+		m_ingest = cb;
+		m_data = data;
+	}
 
 	private:
-		long		m_lastValue;
 		std::string	m_asset_name;
+		std::string m_port;
+		int			m_baud;
+		int			m_bits;
+		int			m_stopBits;
+		char		m_parity;
+		FILE 		*m_fp;
+		std::thread *m_thread;
+		unsigned int m_sleepInterval;
+		bool		m_running;
+		void		*m_data;
+		void		(*m_ingest)(void *, Reading);
 };
 #endif
