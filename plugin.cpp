@@ -25,7 +25,7 @@ using namespace rapidjson;
 /**
  * Default configuration
  */
-const char *default_config = QUOTE({
+static const char *default_config = QUOTE({
 		"plugin" : {
 			"description" : "J1939 plugin",
 			"type" : "string",
