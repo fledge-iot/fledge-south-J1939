@@ -49,7 +49,7 @@ void J1939::pollThread()
 {
     while(m_running)
     {
-        (*m_ingest)(m_data, nextValue());
+        (*m_ingest)(m_data, takeReading());
         sleep(1);
     }
 }
@@ -136,5 +136,5 @@ Reading J1939::takeReading()
             fseek(m_fp, 0L, SEEK_SET);
         }
         DatapointValue value(buffer);
-        return Reading(m_asset_name, new Datapoint(m_asset, value));
+        return Reading(m_asset_name, new Datapoint(m_asset_name, value));
 }
