@@ -10,6 +10,8 @@
  * Author: Daniel Man
  */
 #include <reading.h>
+#include <config_category.h>
+#include <thread>
 
 class J1939 {
 	public:
